@@ -13,8 +13,9 @@
              v-show="currentState === i"
              v-for="(step, i) in steps"
         >
-            <p class="p" v-for="text in stepData[i]">{{ text }}</p>
+            <p class="p" v-for="text in stepData[i]" @click="popEdit">{{ text }}</p>
         </div>
+        <input type="text" class="editor">
     </div>
 </template>
 
@@ -52,6 +53,11 @@
             }
         },
         name: 'app',
+        methods: {
+            popEdit() {
+
+            }
+        },
         mounted() {
 
         }
