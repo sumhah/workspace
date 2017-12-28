@@ -1,35 +1,57 @@
-* {
-    padding: 0;
-    margin: 0;
+@import 'reset.scss';
+
+.app {
+
 }
 
-html, body {
-    padding: 0;
-    margin: 0;
-    background-color: #666600;
+.steps {
+    padding: 20px;
+    background-color: #fff;
+
+    .step-btn {
+        padding: 10px 20px;
+        height: 50px;
+        font-size: 20px;
+        border: none;
+        border-radius: 6px;
+        margin-right: 40px;
+        box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        outline: none;
+        color: #4688f1;
+        transition: all .4s ease;
+
+        &:hover {
+            box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        }
+        &.active {
+            color: #ffffff;
+            background-color: #4688f1;
+        }
+    }
 }
 
-img {
-    border: 0;
+.content {
+    font-size: 0;
+    padding: 20px;
+    margin-top: 20px;
+
+    .p {
+        display: inline-block;
+        width: 400px;
+        padding: 20px;
+        margin-right: 26px;
+        margin-bottom: 26px;
+        border-radius: 4px;
+        line-height: 26px;
+        font-size: 14px;
+        color: #666666;
+        background-color: #fff;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .06);
+        transition: all .4s ease;
+
+        &:hover {
+            box-shadow: 0 2px 2px 2px rgba(0, 0, 0, .06);
+        }
+    }
 }
 
-a {
-    outline: none;
-}
-
-#drawing {
-    background-color: #666;
-}
-
-.GameScreen {
-    position: absolute;
-    overflow: hidden;
-    width: 512px;
-    height: 448px;
-    left: 50%;
-    margin-left: -256px;
-    top: 50%;
-    margin-top: -224px;
-    border: #630 double 4px;
-    background: #000;
-}
