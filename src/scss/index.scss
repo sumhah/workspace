@@ -1,56 +1,114 @@
 @import 'reset.scss';
 
-.app {
-
-}
+$header-blue: #376ad3;
+$header-active-blue: #4688f1;
 
 .steps {
-    padding: 20px;
+    padding: 10px 20px;
     background-color: #fff;
 
     .step-btn {
-        padding: 10px 20px;
-        height: 50px;
-        font-size: 20px;
+        padding: 8px 16px;
+        height: 38px;
+        font-size: 14px;
         border: none;
         border-radius: 6px;
-        margin-right: 40px;
-        box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        margin-right: 46px;
         outline: none;
-        color: #4688f1;
+        color: #8590a6;
+        background-color: transparent;
         transition: all .4s ease;
 
         &:hover {
-            box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 1px 4px 3px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(0, 0, 0, 0.06);
         }
         &.active {
-            color: #ffffff;
-            background-color: #4688f1;
+            color: #1e8ae8;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, .4);
         }
     }
 }
 
 .content {
+    width: 1000px;
+    column-width: 450px;
+    column-gap: 26px;
     font-size: 0;
-    padding: 20px;
+    padding: 20px 20px 60px;
     margin-top: 20px;
+}
 
-    .p {
-        display: inline-block;
-        width: 400px;
-        padding: 20px;
-        margin-right: 26px;
-        margin-bottom: 26px;
-        border-radius: 4px;
-        line-height: 26px;
-        font-size: 14px;
-        color: #666666;
-        background-color: #fff;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .06);
-        transition: all .4s ease;
+.menu {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    bottom: 0;
+    background-color: #f3f3f3;
+
+    .add {
+        position: fixed;
+        left: 22px;
+        bottom: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 26px;
+        font-weight: bold;
+        color: #ffffff;
+        border-radius: 50%;
+        background-color: #cecece;
+        vertical-align: middle;
 
         &:hover {
-            box-shadow: 0 2px 2px 2px rgba(0, 0, 0, .06);
+            transform: scale(1.2);
+            background-color: #6bb53f;
+        }
+
+        .add-icon {
+            position: absolute;
+            left: 0;
+            top: 1px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .search-box {
+        position: fixed;
+        left: 80px;
+        bottom: 14px;
+        width: 400px;
+        height: 30px;
+
+        .search {
+            width: 100%;
+            padding: 0 10px;
+            height: 30px;
+            font-size: 14px;
+            text-indent: 18px;
+            border-radius: 6px;
+            color: #1e8ae8;
+            font-style: italic;
+            font-weight: bold;
+            background-color: #ebebeb;
+
+            &:focus {
+                color: #666;
+                font-style: normal;
+                font-weight: normal;
+                background-color: #ffffff;
+                box-shadow: 0 2px 4px 3px rgba(255, 255, 255, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 7px;
+            left: 8px;
+            width: 16px;
+            height: 16px;
+            fill: #afbdcf;
         }
     }
 }
