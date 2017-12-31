@@ -13,14 +13,18 @@
              v-show="currentState === i"
              v-for="(step, i) in steps"
         >
-            <card
-                v-model="item.text"
-                :index="i"
-                :key="item.id"
-                @delete="currentData.splice(i, 1)"
-                v-show="cardShow(item)"
-                v-for="(item, i) in step.data"
-            ></card>
+            <transition-group name="fade"
+                              tag="div"
+            >
+                <card
+                    v-model="item.text"
+                    :index="i"
+                    :key="item.id"
+                    @delete="currentData.splice(i, 1)"
+                    v-show="cardShow(item)"
+                    v-for="(item, i) in step.data"
+                ></card>
+            </transition-group>
         </div>
         <div class="menu">
             <button class="add" @click="addCard"><span class="add-icon">+</span></button>

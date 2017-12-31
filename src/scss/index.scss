@@ -113,3 +113,11 @@ $header-active-blue: #4688f1;
     }
 }
 
+
+.fade-enter-active, .fade-leave-active {
+    transition: all .3s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+    transform: translateY(40px);
+    opacity: 0;
+}
