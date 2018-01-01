@@ -9,7 +9,7 @@
         ref="editor"
         @blur="isEdit = false"
         v-model="myText"
-    ></textarea><button class="delete" @click="$emit('delete', index)">x</button></pre>
+    ></textarea><button class="delete" @click="$emit('delete', index)">x</button><button class="relate-time" @click="$emit('relateTime', index)">relate time</button></pre>
 </template>
 
 <script>

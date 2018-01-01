@@ -38,7 +38,6 @@
 
     .delete {
         position: absolute;
-        display: inline-block;
         right: 4px;
         top: 4px;
         vertical-align: middle;
@@ -52,6 +51,20 @@
         &:hover {
             color: #ffffff;
             background-color: #e8272d;
+        }
+    }
+
+    .relate-time {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 5px;
+        padding: 6px 10px;
+        border-radius: 4px;
+
+        &:hover {
+            color: #ffffff;
+            background-color: #a8c023;
         }
     }
 }

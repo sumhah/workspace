@@ -22,6 +22,7 @@
                     :index="i"
                     :key="item.id"
                     @delete="currentData.splice(i, 1)"
+                    @relateTime="relateTime"
                     v-show="cardShow(item)"
                     v-for="(item, i) in step.data"
                 ></card>
@@ -114,6 +115,12 @@
                 }
 
                 return item.text.indexOf(searchText) !== -1;
+            },
+            relateTime(index) {
+                const coreItem = this.currentData[index];
+                this.currentData.sort((item1, item2) => {
+                    return Math.abs(coreItem.createTime - item1.createTime) - Math.abs(coreItem.createTime - item2.createTime);
+                });
             }
         },
         computed: {
