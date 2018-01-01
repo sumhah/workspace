@@ -1,4 +1,6 @@
 @import 'reset.scss';
+@import "github.css";
+@import "animate.css";
 
 $header-blue: #376ad3;
 $header-active-blue: #4688f1;
@@ -11,10 +13,8 @@ $header-active-blue: #4688f1;
         padding: 8px 16px;
         height: 38px;
         font-size: 14px;
-        border: none;
         border-radius: 6px;
         margin-right: 46px;
-        outline: none;
         color: #8590a6;
         background-color: transparent;
         transition: all .4s ease;
@@ -65,12 +65,21 @@ $header-active-blue: #4688f1;
             background-color: #6bb53f;
         }
 
+        &.active .add-icon {
+            animation: rotateIn .4s ease;
+        }
+
         .add-icon {
             position: absolute;
             left: 0;
-            top: 1px;
+            top: 0;
             width: 100%;
             height: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     }
 
@@ -113,11 +122,12 @@ $header-active-blue: #4688f1;
     }
 }
 
-
 .fade-enter-active, .fade-leave-active {
     transition: all .3s ease;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */
+{
     transform: translateY(40px);
     opacity: 0;
 }

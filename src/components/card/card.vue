@@ -1,7 +1,9 @@
 <template>
     <pre
         class="card"
-        @dblclick="popEdit">{{ myText }} <textarea
+        @dblclick="popEdit"
+        v-highlightjs="myText"
+    ><code></code> <textarea
         class="card editor"
         v-show="isEdit"
         ref="editor"
@@ -12,6 +14,13 @@
 
 <script>
     /* eslint-disable */
+    // Import Vue and vue-highlgihtjs
+    import Vue from 'vue'
+    import VueHighlightJS from 'vue-highlightjs'
+
+    // Tell Vue.js to use vue-highlightjs
+    Vue.use(VueHighlightJS);
+
     export default {
         props: {
             value: String,

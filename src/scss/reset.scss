@@ -1,9 +1,22 @@
+@font-face {
+    font-family: "OpenSans";
+    src: url('../font/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: "sourceHanSansCN";
+    src: url('../font/SourceHanSansCN-ExtraLight.otf');
+}
+
+$fontList: "OpenSans", "sourceHanSansCN", "Times New Roman", Helvetica, Arial,  Times, serif, sans-serif;
+
 * {
     outline: none;
     border: none;
     padding: 0;
     margin: 0;
+    letter-spacing: 0.5px;
     transition: all .3s ease;
+    font-family: $fontList;
 }
 
 html, body {
@@ -18,4 +31,8 @@ img {
 
 a {
     outline: none;
+}
+
+code, textarea {
+    font-family: $fontList;
 }

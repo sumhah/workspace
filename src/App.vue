@@ -13,8 +13,9 @@
              v-show="currentState === i"
              v-for="(step, i) in steps"
         >
-            <transition-group name="fade"
-                              tag="div"
+            <transition-group
+                name="fade"
+                tag="div"
             >
                 <card
                     v-model="item.text"
@@ -27,7 +28,10 @@
             </transition-group>
         </div>
         <div class="menu">
-            <button class="add" @click="addCard"><span class="add-icon">+</span></button>
+            <button class="add"
+                    @click="addCard"
+                    :class="{active: addActive}"
+            ><span class="add-icon">+</span></button>
             <div class="search-box">
                 <input type="text" name="" id="" class="search"
                        v-model="searchText"
@@ -83,6 +87,7 @@
                     }
                 ],
                 currentState: 0,
+                addActive: false,
                 searchText: '',
                 searchActive: false,
             }
@@ -92,8 +97,15 @@
             addCard() {
                 this.currentData.push({
                     text: '',
-                    id: Symbol(Date.now()),
-                },);
+                    checkNumber: 0,
+                    createTime: Date.now(),
+                    modifyTime: Date.now(),
+                    id: Date.now() + Math.random(),
+                });
+                this.addActive = true;
+                setTimeout(() => {
+                    this.addActive = false;
+                }, 400);
             },
             cardShow(item) {
                 const searchText = this.searchText;
@@ -107,6 +119,38 @@
         computed: {
             currentData() {
                 return this.steps[this.currentState].data;
+            }
+        },
+        created() {
+            if (!localStorage.getItem('data')) {
+                this.steps = [
+                    {
+                        name: 'Demand Analysis',
+                        data: []
+                    },
+                    {
+                        name: 'Development Phase',
+                        data: []
+                    },
+                    {
+                        name: 'Self Testing',
+                        data: []
+                    },
+                    {
+                        name: 'Test Phase',
+                        data: []
+                    },
+                    {
+                        name: 'Complete Phase',
+                        data: []
+                    }
+                ];
+            } else {
+                this.steps = JSON.parse(localStorage.getItem('data'));
+            }
+
+            window.onbeforeunload =  () => {
+                localStorage.setItem('data', JSON.stringify(this.steps));
             }
         },
         mounted() {
