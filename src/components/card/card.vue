@@ -9,16 +9,13 @@
         ref="editor"
         @blur="isEdit = false"
         v-model="myText"
-    ></textarea><button class="delete" @click="$emit('delete', index)">x</button><button class="relate-time" @click="$emit('relateTime', index)">relate time</button></pre>
+    ></textarea><button class="delete" @click="$emit('delete', index)">x</button><button class="relate-time" @click="$emit('relateTime', index)">relate time</button><button class="relate-content" @click="$emit('relateContent', index)">relate content</button></pre>
 </template>
 
 <script>
     /* eslint-disable */
-    // Import Vue and vue-highlgihtjs
     import Vue from 'vue'
     import VueHighlightJS from 'vue-highlightjs'
-
-    // Tell Vue.js to use vue-highlightjs
     Vue.use(VueHighlightJS);
 
     export default {

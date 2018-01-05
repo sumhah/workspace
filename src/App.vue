@@ -23,6 +23,7 @@
                     :key="item.id"
                     @delete="currentData.splice(i, 1)"
                     @relateTime="relateTime"
+                    @relateContent="relateContent"
                     v-show="cardShow(item)"
                     v-for="(item, i) in step.data"
                 ></card>
@@ -121,6 +122,41 @@
                 this.currentData.sort((item1, item2) => {
                     return Math.abs(coreItem.createTime - item1.createTime) - Math.abs(coreItem.createTime - item2.createTime);
                 });
+            },
+            relateContent(index) {
+                const t = Date.now();
+                const coreItem = this.currentData[index];
+                this.currentData.sort((item1, item2) => {
+                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
+                });
+
+                console.log(Date.now() - t);
+            },
+            contentSimilarity(coreItem, item) {
+                const text1 = coreItem.text.trim();
+                const text2 = item.text.trim();
+
+                let score = 0;
+                const subMaxLen = Math.max(text2.length, 20);
+                for (let i = 1; i < subMaxLen; i += 1) {
+                    this.textToSubStrArr(text2, i).forEach((subStr) => {
+                        const cleanStr = subStr.trim();
+                        const cleanStrLen = cleanStr.length;
+
+                        if (text1.indexOf(subStr) !== -1) {
+                            score += Math.pow(cleanStrLen, 4);
+                        }
+                    })
+                }
+                console.log(score / text2.length);
+                return score / text2.length;
+            },
+            textToSubStrArr(text, n = 1) {
+                const arr = [];
+                for (let i = 0, len = text.length; i < len; i += n) {
+                    arr.push(text.substr(i, n));
+                }
+                return arr;
             }
         },
         computed: {

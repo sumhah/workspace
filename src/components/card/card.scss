@@ -67,4 +67,17 @@
             background-color: #a8c023;
         }
     }
+
+    .relate-content {
+        position: absolute;
+        left: 10%;
+        bottom: 5px;
+        padding: 6px 10px;
+        border-radius: 4px;
+
+        &:hover {
+            color: #ffffff;
+            background-color: #c03a31;
+        }
+    }
 }
