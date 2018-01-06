@@ -268,7 +268,7 @@
                     const currentData = this.currentData;
                     const lines = [[], []];
                     const $ref = this.$refs;
-                    currentData.forEach((item, i) => {
+                    currentData.forEach((item) => {
                         let index = bottoms[0] - 20 > bottoms[1] ? 1 : 0;
                         if ($ref[item.id]) {
                             bottoms[index] += $ref[item.id][0].$el.offsetHeight + gap;
