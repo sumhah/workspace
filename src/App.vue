@@ -62,6 +62,7 @@
 <script>
     /* eslint-disable */
     import card from './components/card/card.vue';
+    import stringSimilarity from 'string-similarity';
 
     export default {
         data() {
@@ -97,13 +98,25 @@
         name: 'app',
         methods: {
             addCard() {
-                this.currentData.push({
-                    text: '',
-                    checkNumber: 0,
-                    createTime: Date.now(),
-                    modifyTime: Date.now(),
-                    id: Date.now() + Math.random(),
-                });
+                for (let i = 0; i < 10; i += 1) {
+                    this.currentData.push({
+                        text: `
+                    1.先使用全文匹配，高度相似的情况考虑完毕
+                    2.仅局部小子串相似，启用关键词匹配，相同关键词越多，越相似
+                    3.提取关键词进行 映射分类，  import from  let 等关键词  分类至javascript维度， 对文本打上标签
+                    卡片相关性
+1.时间接近度    完成
+2.内容相似度
+3.熟悉度  分为 ： 根据 查看次数 和时间远近
+                    `,
+                        checkNumber: 0,
+                        createTime: Date.now(),
+                        modifyTime: Date.now(),
+                        id: Date.now() + Math.random(),
+                    });
+                }
+
+                console.log(this.currentData);
                 this.addActive = true;
                 setTimeout(() => {
                     this.addActive = false;
@@ -127,34 +140,40 @@
                 const t = Date.now();
                 const coreItem = this.currentData[index];
                 this.currentData.sort((item1, item2) => {
-                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
+//                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
+                    return stringSimilarity.compareTwoStrings(coreItem.text, item2.text) - stringSimilarity.compareTwoStrings(coreItem.text, item1.text);
                 });
 
-                console.log(Date.now() - t);
+                console.log(`${Date.now() - t}ms`);
             },
             contentSimilarity(coreItem, item) {
-                const text1 = coreItem.text.trim();
-                const text2 = item.text.trim();
+                const coreItemText = coreItem.text.trim();
+                const itemText = item.text.trim();
 
                 let score = 0;
-                const subMaxLen = Math.max(text2.length, 20);
+                let searchNum = 0;
+                const subMaxLen = Math.min(itemText.length, 50);
                 for (let i = 1; i < subMaxLen; i += 1) {
-                    this.textToSubStrArr(text2, i).forEach((subStr) => {
+                    this.textToSubStrArr(itemText, i).forEach((subStr) => {
                         const cleanStr = subStr.trim();
                         const cleanStrLen = cleanStr.length;
 
-                        if (text1.indexOf(subStr) !== -1) {
-                            score += Math.pow(cleanStrLen, 4);
+                        if (coreItemText.indexOf(subStr) !== -1) {
+                            score += Math.pow(cleanStrLen, 5);
                         }
+                        searchNum += 1;
                     })
                 }
-                console.log(score / text2.length);
-                return score / text2.length;
+                if (searchNum > 100000) {
+                    console.log('搜索次数:', searchNum);
+                }
+//                console.log(coreItem.text.substr(0, 10), score / (searchNum + 1), searchNum);
+                return score / (searchNum + 1);
             },
-            textToSubStrArr(text, n = 1) {
+            textToSubStrArr(text, subStrLen = 1) {
                 const arr = [];
-                for (let i = 0, len = text.length; i < len; i += n) {
-                    arr.push(text.substr(i, n));
+                for (let i = 0, len = text.length; i < len; i += subStrLen) {
+                    arr.push(text.substr(i, subStrLen));
                 }
                 return arr;
             }
@@ -192,7 +211,7 @@
                 this.steps = JSON.parse(localStorage.getItem('data'));
             }
 
-            window.onbeforeunload =  () => {
+            window.onbeforeunload = () => {
                 localStorage.setItem('data', JSON.stringify(this.steps));
             }
         },
