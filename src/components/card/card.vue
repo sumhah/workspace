@@ -1,15 +1,21 @@
 <template>
-    <pre
-        class="card"
-        @dblclick="popEdit"
-        v-highlightjs="myText"
-    ><code></code> <textarea
-        class="card editor"
-        v-show="isEdit"
-        ref="editor"
-        @blur="isEdit = false"
-        v-model="myText"
-    ></textarea><button class="delete" @click="$emit('delete', index)">x</button><button class="relate-time" @click="$emit('relateTime', index)">relate time</button><button class="relate-content" @click="$emit('relateContent', index)">relate content</button></pre>
+    <div class="card">
+        <pre
+            class="card-pre"
+            @dblclick="popEdit"
+            v-highlightjs="myText"
+        ><code></code> </pre>
+        <textarea
+            class="card editor"
+            v-show="isEdit"
+            ref="editor"
+            @blur="isEdit = false"
+            v-model="myText"
+        ></textarea>
+        <button class="delete" @click="$emit('delete', index)">x</button>
+        <button class="relate-time" @click="$emit('relateTime', index)">relate time</button>
+        <button class="relate-content" @click="$emit('relateContent', index)">relate content</button>
+    </div>
 </template>
 
 <script>

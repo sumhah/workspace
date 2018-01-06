@@ -98,25 +98,14 @@
         name: 'app',
         methods: {
             addCard() {
-                for (let i = 0; i < 10; i += 1) {
-                    this.currentData.push({
-                        text: `
-                    1.先使用全文匹配，高度相似的情况考虑完毕
-                    2.仅局部小子串相似，启用关键词匹配，相同关键词越多，越相似
-                    3.提取关键词进行 映射分类，  import from  let 等关键词  分类至javascript维度， 对文本打上标签
-                    卡片相关性
-1.时间接近度    完成
-2.内容相似度
-3.熟悉度  分为 ： 根据 查看次数 和时间远近
-                    `,
-                        checkNumber: 0,
-                        createTime: Date.now(),
-                        modifyTime: Date.now(),
-                        id: Date.now() + Math.random(),
-                    });
-                }
+                this.currentData.push({
+                    text: ``,
+                    checkNumber: 0,
+                    createTime: Date.now(),
+                    modifyTime: Date.now(),
+                    id: Date.now() + Math.random(),
+                });
 
-                console.log(this.currentData);
                 this.addActive = true;
                 setTimeout(() => {
                     this.addActive = false;
@@ -176,6 +165,9 @@
                     arr.push(text.substr(i, subStrLen));
                 }
                 return arr;
+            },
+            clearCurrentData() {
+                this.currentData.splice(0, this.currentData.length);
             }
         },
         computed: {
