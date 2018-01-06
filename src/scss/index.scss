@@ -39,6 +39,12 @@ $header-active-blue: #4688f1;
     padding: 20px 20px 60px;
     margin-top: 20px;
     overflow: hidden;
+
+    .line {
+        display: inline-block;
+        vertical-align: top;
+        width: 540px;
+    }
 }
 
 .menu {

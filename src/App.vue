@@ -16,16 +16,20 @@
             <transition-group
                 name="fade"
                 tag="div"
+                class="line"
+                v-for="(line, lineIndex) in lines"
+                :key="Math.random().toString(16)"
             >
                 <card
                     v-model="item.text"
-                    :index="i"
+                    :item="item"
                     :key="item.id"
-                    @delete="currentData.splice(i, 1)"
+                    @delete="remove"
                     @relateTime="relateTime"
                     @relateContent="relateContent"
+                    :ref="item.id"
                     v-show="cardShow(item)"
-                    v-for="(item, i) in step.data"
+                    v-for="(item, i) in line"
                 ></card>
             </transition-group>
         </div>
@@ -93,6 +97,10 @@
                 addActive: false,
                 searchText: '',
                 searchActive: false,
+                lines: [
+                    [],
+                    []
+                ],
             }
         },
         name: 'app',
@@ -118,15 +126,19 @@
 
                 return item.text.indexOf(searchText) !== -1;
             },
-            relateTime(index) {
-                const coreItem = this.currentData[index];
+            remove(item) {
+                const currentData = this.currentData;
+                currentData.splice(currentData.indexOf(item), 1);
+            },
+            relateTime(item) {
+                const coreItem = item;
                 this.currentData.sort((item1, item2) => {
                     return Math.abs(coreItem.createTime - item1.createTime) - Math.abs(coreItem.createTime - item2.createTime);
                 });
             },
-            relateContent(index) {
+            relateContent(item) {
                 const t = Date.now();
-                const coreItem = this.currentData[index];
+                const coreItem = item;
                 this.currentData.sort((item1, item2) => {
 //                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
                     return stringSimilarity.compareTwoStrings(coreItem.text, item2.text) - stringSimilarity.compareTwoStrings(coreItem.text, item1.text);
@@ -247,7 +259,28 @@
 //            this.clearCurrentData();
         },
         watch: {
+            currentData() {
+                this.$nextTick(() => {
+                    let bottoms = [
+                        0, 0,
+                    ];
+                    const gap = 26;
+                    const currentData = this.currentData;
+                    const lines = [[], []];
+                    const $ref = this.$refs;
+                    currentData.forEach((item, i) => {
+                        let index = bottoms[0] - 20 > bottoms[1] ? 1 : 0;
+                        if ($ref[item.id]) {
+                            bottoms[index] += $ref[item.id][0].$el.offsetHeight + gap;
+                        } else {
+                            bottoms[index] += 500 + gap;
+                        }
 
+                        lines[index].push(item);
+                    });
+                    this.lines = lines;
+                })
+            }
         },
         components: {
             card,

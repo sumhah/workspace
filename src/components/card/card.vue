@@ -13,9 +13,9 @@
             @blur="isEdit = false"
             v-model="myText"
         ></textarea>
-        <button class="delete" @click="$emit('delete', index)">x</button>
-        <button class="relate-time" @click="$emit('relateTime', index)">relate time</button>
-        <button class="relate-content" @click="$emit('relateContent', index)">relate content</button>
+        <button class="delete" @click="$emit('delete', item)">x</button>
+        <button class="relate-time" @click="$emit('relateTime', item)">relate time</button>
+        <button class="relate-content" @click="$emit('relateContent', item)">relate content</button>
     </div>
 </template>
 
@@ -29,6 +29,7 @@
         props: {
             value: String,
             index: Number,
+            item: Object,
         },
         data() {
             return {
@@ -49,7 +50,7 @@
         },
         watch: {
             myText(newVal) {
-                this.$emit('input', newVal, this.index);
+                this.$emit('input', newVal);
             },
         },
     }
