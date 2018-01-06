@@ -103,9 +103,8 @@
                     checkNumber: 0,
                     createTime: Date.now(),
                     modifyTime: Date.now(),
-                    id: Date.now() + Math.random(),
+                    id: Date.now() + (Math.random() * 10000).toFixed(0),
                 });
-
                 this.addActive = true;
                 setTimeout(() => {
                     this.addActive = false;
@@ -168,12 +167,49 @@
             },
             clearCurrentData() {
                 this.currentData.splice(0, this.currentData.length);
+            },
+            resizeWaterfall() {
+//                this.$nextTick(() => {
+//                    const currentData = this.currentData;
+//                    const $refs = this.$refs;
+//                    const styles = [];
+//                    const gap = 26;
+//                    const lines = [
+//                        {
+//                            bottom: 0,
+//                            left: 0,
+//                        },
+//                        {
+//                            bottom: 0,
+//                            left: 490 + gap,
+//                        },
+//                    ];
+//                    currentData.forEach((item) => {
+//                        const card = $refs[`card${item.id}`][0];
+//                        if (!card) {
+//                            return;
+//                        }
+//                        const currentLine = lines.sort((line1, line2) => {
+//                            return line1.bottom - line2.bottom;
+//                        })[0];
+//
+//                        styles.push({
+//                            left: currentLine.left + gap + 'px',
+//                            top: currentLine.bottom + gap + 'px',
+//                        });
+//                        currentLine.bottom += card.$el.offsetHeight + gap;
+//                        this.cardWrapperHeight = lines.sort((line1, line2) => {
+//                            return line2.bottom - line1.bottom;
+//                        })[0].bottom;
+//                    });
+//                    this.styles = styles;
+//                });
             }
         },
         computed: {
             currentData() {
                 return this.steps[this.currentState].data;
-            }
+            },
         },
         created() {
             if (!localStorage.getItem('data')) {
@@ -208,11 +244,13 @@
             }
         },
         mounted() {
+//            this.clearCurrentData();
+        },
+        watch: {
 
         },
-        watch: {},
         components: {
-            card
+            card,
         }
     }
 </script>

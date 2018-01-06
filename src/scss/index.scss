@@ -31,12 +31,14 @@ $header-active-blue: #4688f1;
 }
 
 .content {
-    width: 1000px;
-    column-width: 450px;
-    column-gap: 26px;
+    position: relative;
+    width: 1200px;
+    //column-width: 450px;
+    //column-gap: 26px;
     font-size: 0;
     padding: 20px 20px 60px;
     margin-top: 20px;
+    overflow: hidden;
 }
 
 .menu {

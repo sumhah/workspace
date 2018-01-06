@@ -1,8 +1,9 @@
 <template>
-    <div class="card">
+    <div class="card"
+         @dblclick="popEdit"
+    >
         <pre
             class="card-pre"
-            @dblclick="popEdit"
             v-highlightjs="myText"
         ><code></code> </pre>
         <textarea
@@ -47,9 +48,9 @@
             },
         },
         watch: {
-            isEdit() {
-                this.$emit('input', this.myText);
-            }
+            myText(newVal) {
+                this.$emit('input', newVal, this.index);
+            },
         },
     }
 </script>
