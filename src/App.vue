@@ -17,7 +17,7 @@
                 name="fade"
                 tag="div"
                 class="line"
-                v-for="(line, lineIndex) in lines"
+                v-for="line in lines"
                 :key="Math.random().toString(16)"
             >
                 <card
