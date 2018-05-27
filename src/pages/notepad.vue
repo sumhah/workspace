@@ -65,7 +65,7 @@
 
 <script>
     /* eslint-disable */
-    import card from './components/card/card.vue';
+    import card from '@/components/card/card.vue';
     import stringSimilarity from 'string-similarity';
 
     export default {
@@ -288,4 +288,4 @@
     }
 </script>
 
-<style lang="scss" src="../scss/notepad.scss"></style>
+<style lang="scss" src="../scss/notepad.scss" scoped></style>

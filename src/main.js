@@ -4,9 +4,11 @@ import Vue from 'vue';
 import App from './App';
 import Router from 'vue-router'
 import Status from './pages/status'
+import Notepad from './pages/notepad'
 
 Vue.config.productionTip = false;
 
+Vue.use(Router)
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
@@ -16,13 +18,18 @@ new Vue({
         routes: [
             {
                 path: '/',
-                name: 'status',
+                name: 'index',
                 component: Status
             },
             {
                 path: '/status',
                 name: 'status',
                 component: Status
+            },
+            {
+                path: '/notepad',
+                name: 'notepad',
+                component: Notepad
             },
         ]
     })
