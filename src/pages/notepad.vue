@@ -12,9 +12,9 @@
                     :item="item"
                     :text.sync="item.text"
                     :key="item.id"
-                    @delete="remove"
-                    @relateTime="relateTime"
-                    @relateContent="relateContent"
+                    @delete="remove(item)"
+                    @relateTime="relateTime(item)"
+                    @relateContent="relateContent(item)"
                     :ref="item.id"
                     v-show="cardShow(item)"
                     v-for="(item, i) in line"
@@ -92,7 +92,8 @@
                 return item.text.indexOf(searchText) !== -1;
             },
             remove(item) {
-                this.data.splice(data.indexOf(item), 1);
+                const data = this.data
+                data.splice(data.indexOf(item), 1);
             },
             relateTime(item) {
                 const coreItem = item;
@@ -102,7 +103,7 @@
                 const t = Date.now();
                 const coreItem = item;
                 this.data.sort((item1, item2) => {
-//                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
+                    //                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
                     return stringSimilarity.compareTwoStrings(coreItem.text, item2.text) - stringSimilarity.compareTwoStrings(coreItem.text, item1.text);
                 });
 
@@ -189,7 +190,7 @@
             }
         },
         mounted() {
-//            this.clearData();
+           // this.clearData();
         },
         watch: {
             data() {

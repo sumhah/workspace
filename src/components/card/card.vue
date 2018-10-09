@@ -5,7 +5,7 @@
         <pre
             class="card-pre"
             v-highlightjs="text"
-        ><code></code></pre>
+        ><code class="code"></code> </pre>
         <textarea
             class="card editor"
             v-show="isEdit"
@@ -13,9 +13,9 @@
             @blur="isEdit = false"
             v-model="myText"
         ></textarea>
-        <button class="delete" @click="$emit('delete', item)">x</button>
-        <button class="relate-time" @click="$emit('relateTime', item)">relate time</button>
-        <button class="relate-content" @click="$emit('relateContent', item)">relate content</button>
+        <button class="delete" @click="$emit('delete')">x</button>
+        <button class="relate-time" @click="$emit('relateTime')">relate time</button>
+        <button class="relate-content" @click="$emit('relateContent')">relate content</button>
     </div>
 </template>
 
@@ -27,8 +27,6 @@
 
     export default {
         props: {
-            index: Number,
-            item: Object,
             text: String,
         },
         data() {

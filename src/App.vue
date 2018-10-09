@@ -23,14 +23,4 @@
         font-family: "sourceHanSansCN";
         src: url('./font/SourceHanSansCN-Light.otf');
     }
-
-    html, body {
-        margin: 0;
-        padding: 0;
-    }
-
-    #app {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
 </style>
