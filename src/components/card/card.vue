@@ -4,8 +4,8 @@
     >
         <pre
             class="card-pre"
-            v-highlightjs="myText"
-        ><code></code> </pre>
+            v-highlightjs="text"
+        ><code></code></pre>
         <textarea
             class="card editor"
             v-show="isEdit"
@@ -27,14 +27,14 @@
 
     export default {
         props: {
-            value: String,
             index: Number,
             item: Object,
+            text: String,
         },
         data() {
             return {
-                myText: this.value,
                 isEdit: false,
+                myText: this.text,
             }
         },
         name: 'card',
@@ -50,10 +50,10 @@
         },
         watch: {
             myText(newVal) {
-                this.$emit('input', newVal);
+                this.$emit('update:text', newVal);
             },
         },
     }
 </script>
 
-<style lang="scss" src="./card.scss"></style>
+<style lang="scss" src="./card.scss" scoped></style>

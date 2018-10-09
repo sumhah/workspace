@@ -1,28 +1,16 @@
 <template>
     <div id="app" class="app">
-        <div class="steps">
-            <button
-                class="step-btn"
-                :class="{active: currentState === i}"
-                v-for="(step, i) in steps"
-                @click="currentState = i"
-            >{{ step.name }}
-            </button>
-        </div>
-        <div class="content"
-             v-show="currentState === i"
-             v-for="(step, i) in steps"
-        >
+        <div class="content">
             <transition-group
                 name="fade"
                 tag="div"
                 class="line"
-                v-for="line in lines"
-                :key="Math.random().toString(16)"
+                v-for="(line,i) in lines"
+                :key="i"
             >
                 <card
-                    v-model="item.text"
                     :item="item"
+                    :text.sync="item.text"
                     :key="item.id"
                     @delete="remove"
                     @relateTime="relateTime"
@@ -71,28 +59,7 @@
     export default {
         data() {
             return {
-                steps: [
-                    {
-                        name: 'Demand Analysis',
-                        data: []
-                    },
-                    {
-                        name: 'Development Phase',
-                        data: []
-                    },
-                    {
-                        name: 'Self Testing',
-                        data: []
-                    },
-                    {
-                        name: 'Test Phase',
-                        data: []
-                    },
-                    {
-                        name: 'Complete Phase',
-                        data: []
-                    }
-                ],
+                data: [],
                 currentState: 0,
                 addActive: false,
                 searchText: '',
@@ -106,7 +73,7 @@
         name: 'app',
         methods: {
             addCard() {
-                this.currentData.push({
+                this.data.push({
                     text: ``,
                     checkNumber: 0,
                     createTime: Date.now(),
@@ -114,9 +81,7 @@
                     id: Date.now() + (Math.random() * 10000).toFixed(0),
                 });
                 this.addActive = true;
-                setTimeout(() => {
-                    this.addActive = false;
-                }, 400);
+                setTimeout(() => this.addActive = false, 400);
             },
             cardShow(item) {
                 const searchText = this.searchText;
@@ -127,19 +92,16 @@
                 return item.text.indexOf(searchText) !== -1;
             },
             remove(item) {
-                const currentData = this.currentData;
-                currentData.splice(currentData.indexOf(item), 1);
+                this.data.splice(data.indexOf(item), 1);
             },
             relateTime(item) {
                 const coreItem = item;
-                this.currentData.sort((item1, item2) => {
-                    return Math.abs(coreItem.createTime - item1.createTime) - Math.abs(coreItem.createTime - item2.createTime);
-                });
+                this.data.sort((item1, item2) => Math.abs(coreItem.createTime - item1.createTime) - Math.abs(coreItem.createTime - item2.createTime))
             },
             relateContent(item) {
                 const t = Date.now();
                 const coreItem = item;
-                this.currentData.sort((item1, item2) => {
+                this.data.sort((item1, item2) => {
 //                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
                     return stringSimilarity.compareTwoStrings(coreItem.text, item2.text) - stringSimilarity.compareTwoStrings(coreItem.text, item1.text);
                 });
@@ -177,12 +139,12 @@
                 }
                 return arr;
             },
-            clearCurrentData() {
-                this.currentData.splice(0, this.currentData.length);
+            clearData() {
+                this.data.splice(0, this.data.length);
             },
             resizeWaterfall() {
 //                this.$nextTick(() => {
-//                    const currentData = this.currentData;
+//                    const data = this.data;
 //                    const $refs = this.$refs;
 //                    const styles = [];
 //                    const gap = 26;
@@ -196,7 +158,7 @@
 //                            left: 490 + gap,
 //                        },
 //                    ];
-//                    currentData.forEach((item) => {
+//                    data.forEach((item) => {
 //                        const card = $refs[`card${item.id}`][0];
 //                        if (!card) {
 //                            return;
@@ -218,57 +180,27 @@
 //                });
             }
         },
-        computed: {
-            currentData() {
-                return this.steps[this.currentState].data;
-            },
-        },
         created() {
-            if (!localStorage.getItem('data')) {
-                this.steps = [
-                    {
-                        name: 'Demand Analysis',
-                        data: []
-                    },
-                    {
-                        name: 'Development Phase',
-                        data: []
-                    },
-                    {
-                        name: 'Self Testing',
-                        data: []
-                    },
-                    {
-                        name: 'Test Phase',
-                        data: []
-                    },
-                    {
-                        name: 'Complete Phase',
-                        data: []
-                    }
-                ];
-            } else {
-                this.steps = JSON.parse(localStorage.getItem('data'));
+            if (localStorage.getItem('data')) {
+                this.data = JSON.parse(localStorage.getItem('data'));
             }
-
             window.onbeforeunload = () => {
-                localStorage.setItem('data', JSON.stringify(this.steps));
+                localStorage.setItem('data', JSON.stringify(this.data));
             }
         },
         mounted() {
-//            this.clearCurrentData();
+//            this.clearData();
         },
         watch: {
-            currentData() {
+            data() {
                 this.$nextTick(() => {
                     let bottoms = [
                         0, 0,
                     ];
                     const gap = 26;
-                    const currentData = this.currentData;
                     const lines = [[], []];
                     const $ref = this.$refs;
-                    currentData.forEach((item) => {
+                    this.data.forEach((item) => {
                         let index = bottoms[0] - 20 > bottoms[1] ? 1 : 0;
                         if ($ref[item.id]) {
                             bottoms[index] += $ref[item.id][0].$el.offsetHeight + gap;
@@ -288,4 +220,4 @@
     }
 </script>
 
-<style lang="scss" src="../scss/notepad.scss" scoped></style>
+<style lang="scss" src="../scss/notepad.scss"></style>
