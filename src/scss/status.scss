@@ -98,45 +98,6 @@ $header-active-blue: #4688f1;
         }
     }
     
-    .todo-input {
-        padding: 20px;
-        font-size: 14px;
-        
-        .input {
-            padding: 4px 10px;
-            border-bottom: 1px solid $header-blue;
-            font-size: 14px;
-            
-            &:focus {
-                border-bottom-color: $header-active-blue;
-            }
-        }
-        
-        .submit-btn {
-            display: block;
-            padding: 4px 8px;
-            margin-top: 10px;
-            min-width: 70px;
-            border-radius: 4px;
-            font-size: 16px;
-            color: #ffffff;
-            font-weight: bold;
-            letter-spacing: 4px;
-            cursor: pointer;
-            text-align: center;
-            background-color: $header-blue;
-            opacity: .4;
-            
-            &.on {
-                opacity: 1;
-            }
-            
-            &:hover {
-                background-color: $header-active-blue;
-            }
-        }
-    }
-    
     .todo-list {
         margin-top: 40px;
         padding: 20px;
