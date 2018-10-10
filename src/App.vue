@@ -11,9 +11,10 @@
 </script>
 
 <style lang="scss">
-    @import './scss/reset.scss';
-    @import "./scss/github.css";
-    @import "./scss/animate.css";
+    @import './scss/reset';
+    @import "./scss/github";
+    @import "./scss/transition";
+    @import "./scss/animate";
 
     @font-face {
         font-family: "OpenSans";

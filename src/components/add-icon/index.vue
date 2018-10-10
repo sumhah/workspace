@@ -1,0 +1,62 @@
+<template>
+    <button class="add"
+            @click="addCard"
+            :class="{active: addActive}"
+    ><span class="add-icon">+</span></button>
+</template>
+
+<script>
+    export default {
+        name: 'add-icon',
+        data() {
+            return {
+                addActive: false,
+            }
+        },
+        methods: {
+            addCard() {
+                this.$store.commit('addCard')
+                this.addActive = true;
+                setTimeout(() => this.addActive = false, 400);
+            }
+        }
+    };
+</script>
+
+<style lang="scss" scoped>
+    .add {
+        position: fixed;
+        left: 22px;
+        bottom: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 26px;
+        font-weight: bold;
+        color: #ffffff;
+        border-radius: 50%;
+        background-color: #d7d7d7;
+        vertical-align: middle;
+
+        &:hover {
+            transform: scale(1.2);
+            background-color: #6bb53f;
+        }
+
+        &.active .add-icon {
+            animation: rotateIn .4s ease;
+        }
+
+        .add-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
+</style>
