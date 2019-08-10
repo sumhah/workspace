@@ -2,8 +2,7 @@
     transition: all .3s ease;
 }
 
-.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */
-{
-    transform: translateY(40px);
+.fade-enter, .fade-leave-to {
+    transform: scale(0);
     opacity: 0;
 }

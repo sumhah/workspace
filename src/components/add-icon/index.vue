@@ -1,26 +1,29 @@
 <template>
-    <button class="add"
-            @click="addCard"
-            :class="{active: addActive}"
-    ><span class="add-icon">+</span></button>
+    <button
+        class="add"
+        :class="{active: addActive}"
+        @click="addCard"
+    >
+        <span class="add-icon">+</span>
+    </button>
 </template>
 
 <script>
-    export default {
-        name: 'add-icon',
-        data() {
-            return {
-                addActive: false,
-            }
-        },
-        methods: {
-            addCard() {
-                this.$store.commit('addCard')
-                this.addActive = true;
-                setTimeout(() => this.addActive = false, 400);
-            }
+export default {
+    name: 'AddIcon',
+    data() {
+        return {
+            addActive: false,
+        };
+    },
+    methods: {
+        addCard() {
+            this.$emit('click');
+            this.addActive = true;
+            setTimeout(() => this.addActive = false, 400);
         }
-    };
+    }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -36,6 +39,7 @@
         border-radius: 50%;
         background-color: #d7d7d7;
         vertical-align: middle;
+        transition: transform .3s ease;
 
         &:hover {
             transform: scale(1.2);

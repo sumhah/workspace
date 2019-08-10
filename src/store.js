@@ -11,10 +11,10 @@ export default new Vuex.Store({
     },
     mutations: {
         searchTextChange(state, val) {
-            state.searchText = val
+            state.searchText = val;
         },
         cardListInit(state, val) {
-            state.cardList = val
+            state.cardList = val;
         },
         addCard(state) {
             state.cardList.push({
@@ -26,20 +26,19 @@ export default new Vuex.Store({
             });
         },
         removeCard(state, item) {
-            const cardList = state.cardList;
+            const { cardList } = state;
             cardList.splice(cardList.indexOf(item), 1);
         },
         relateTime(state, coreItem) {
             state.cardList.sort((item1, item2) => Math.abs(coreItem.createTime - item1.createTime) - Math.abs(coreItem.createTime - item2.createTime));
         },
         relateText(state, coreItem) {
-            state.cardList.sort((item1, item2) => {
+            state.cardList.sort((item1, item2) => 
                 //                    return this.contentSimilarity(coreItem, item2) - this.contentSimilarity(coreItem, item1);
-                return stringSimilarity.compareTwoStrings(coreItem.text, item2.text) - stringSimilarity.compareTwoStrings(coreItem.text, item1.text);
-            });
+                stringSimilarity.compareTwoStrings(coreItem.text, item2.text) - stringSimilarity.compareTwoStrings(coreItem.text, item1.text));
         },
         clearData(state) {
-            state.cardList = []
+            state.cardList = [];
         },
     },
-})
+});

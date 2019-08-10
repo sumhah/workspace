@@ -6,14 +6,15 @@
     padding: 0;
     margin: 0;
     letter-spacing: 0.5px;
-    transition: all .3s ease;
     font-family: $fontList;
 }
 
 html, body {
     padding: 0;
     margin: 0;
-    background-color: #f3f3f3;
+    width: 100%;
+    height: 100%;
+    background-color: #282c34;
 }
 
 img {

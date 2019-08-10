@@ -1,19 +1,22 @@
 import Vue from 'vue';
+import ElementUI from 'element-ui';
 import App from './App';
-import router from './router'
-import store from './store'
+import router from './router';
+import store from './store';
+import components from './components';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+Vue.use(components);
 
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 // const data = this.data;
 // data.splice(data.indexOf(item), 1);
-console.log(Vue.prototype);
 
 new Vue({
     el: '#app',
-    template: '<App/>',
-    components: {App},
+    render: h => h(App),
     router,
     store,
-})
+});

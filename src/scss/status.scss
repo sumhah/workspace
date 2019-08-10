@@ -7,6 +7,7 @@ $header-active-blue: #4688f1;
 
 .app {
     font-size: 0;
+    padding: 20px;
     text-align: left;
     
     h1 {
@@ -14,6 +15,17 @@ $header-active-blue: #4688f1;
         line-height: 60px;
         margin-bottom: 10px;
         text-indent: 20px;
+    }
+    
+    .earnings {
+        height: 40px;
+        font-size: 20px;
+        color: #2e3a41;
+        font-weight: bold;
+        
+        .money {
+            color: #4c9f67;
+        }
     }
     
     .status-list {
@@ -99,13 +111,14 @@ $header-active-blue: #4688f1;
     }
     
     .todo-input {
-        padding: 20px;
+        margin-top: 20px;
         font-size: 14px;
         
         .input {
             padding: 4px 10px;
             border-bottom: 1px solid $header-blue;
             font-size: 14px;
+            background-color: transparent;
             
             &:focus {
                 border-bottom-color: $header-active-blue;
@@ -137,56 +150,102 @@ $header-active-blue: #4688f1;
         }
     }
     
+    .save-btn {
+        position: fixed;
+        right: 0;
+        top: 0;
+        display: block;
+        padding: 4px 8px;
+        margin-top: 10px;
+        min-width: 70px;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #ffffff;
+        font-weight: bold;
+        letter-spacing: 4px;
+        cursor: pointer;
+        text-align: center;
+        background-color: $header-blue;
+    
+        &:hover {
+            background-color: $header-active-blue;
+        }
+    }
+    
+    .tab-list {
+        display: flex;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        
+        .tab {
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 16px;
+            margin-right: 10px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            user-select: none;
+            transition: all .3s ease;
+            
+            &.on {
+                color: #ffffff;
+                background-color: $header-blue;
+            }
+        }
+    }
+    
     .todo-list {
         margin-top: 40px;
-        padding: 20px;
         height: 600px;
         background-color: #f3f3f5;
         
         .item {
             position: relative;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             height: 34px;
             margin-right: 20px;
             margin-bottom: 20px;
             padding: 0 14px;
             line-height: 34px;
-            border-radius: 6px;
+            border-radius: 4px;
             color: #000000;
             background-color: #ffffff;
             text-align: center;
             font-size: 14px;
-            transition-duration: .3s;
+            transition: all .3s ease;
+            cursor: pointer;
             
-            &:hover {
-                padding-right: 30px;
+            &.urgency {
+                background-color: #cc2b29;
+                color: #ffffff;
                 
-                .complete {
-                    opacity: 1;
+                .weight {
+                    color: #f7bc00;
                 }
             }
             
-            .complete {
-                position: absolute;
-                right: 2px;
-                top: 50%;
-                vertical-align: middle;
-                width: 24px;
-                height: 24px;
-                transform: translateY(-50%);
-                border-radius: 4px;
-                line-height: 24px;
-                transition-duration: .3s;
-                font-size: 14px;
-                font-weight: bold;
-                opacity: 0;
+            &:not(.fade-leave-active):hover {
                 color: #ffffff;
-                background-color: #e3e3e3;
+                background-color: #178bf7;
+                transform: scale(1.1);
                 
-                &:hover {
-                    color: #ffffff;
-                    background-color: #178bf7;
+                .weight {
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #fad759;
                 }
+            }
+            
+            .weight {
+                margin-left: 8px;
+                color: #4c9f67;
+                transition: all .3s ease;
             }
         }
     }

@@ -1,16 +1,18 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Status from './pages/status'
-import Notepad from './pages/notepad'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Status from './pages/status';
+import Notepad from './pages/notepad';
+import AST from './pages/ast';
+import Knowledge from './pages/knowledge';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     routes: [
         {
             path: '/',
             name: 'index',
-            component: Status
+            component: Knowledge
         },
         {
             path: '/status',
@@ -22,5 +24,15 @@ export default new Router({
             name: 'notepad',
             component: Notepad
         },
+        {
+            path: '/ast',
+            name: 'ast',
+            component: AST
+        },
+        {
+            path: '/knowledge',
+            name: 'knowledge',
+            component: Knowledge
+        },
     ]
-})
+});

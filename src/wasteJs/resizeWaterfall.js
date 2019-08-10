@@ -40,4 +40,4 @@ export default {
         //                    this.styles = styles;
         //                });
     },
-}
+};

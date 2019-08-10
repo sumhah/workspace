@@ -1,13 +1,13 @@
 <template>
-    <div id="app">
-        <router-view></router-view>
+    <div id="app" class="app">
+        <router-view />
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'app',
-    };
+export default {
+    name: 'App',
+};
 </script>
 
 <style lang="scss">
@@ -23,5 +23,19 @@
     @font-face {
         font-family: "sourceHanSansCN";
         src: url('./font/SourceHanSansCN-Light.otf');
+    }
+
+    .app {
+        height: 100%;
+    }
+
+    .menu-bar {
+        z-index: 3;
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        bottom: 0;
+        background-color: #f3f3f3;
     }
 </style>

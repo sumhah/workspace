@@ -1,17 +1,18 @@
 <template>
-    <div class="card"
+    <div
+class="card"
          @dblclick="popEdit"
     >
         <pre
-            class="card-pre"
             v-highlightjs="item.text"
+            class="card-pre"
         ><code class="code"></code> </pre>
         <textarea
-            class="card editor"
             v-show="isEdit"
             ref="editor"
-            @blur="isEdit = false"
             v-model="item.text"
+            class="card editor"
+            @blur="isEdit = false"
         ></textarea>
         <button class="delete" @click="remove">x</button>
         <button class="relate-time" @click="relateTime">relate time</button>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-    /* eslint-disable */
+/* eslint-disable */
     import Vue from 'vue'
     import VueHighlightJS from 'vue-highlightjs'
     import {mapState} from 'vuex'
@@ -28,6 +29,7 @@
     Vue.use(VueHighlightJS);
 
     export default {
+        name: 'Card',
         props: {
             item: Object,
         },
@@ -36,7 +38,6 @@
                 isEdit: false,
             }
         },
-        name: 'card',
         computed: {
             ...mapState(['cardList'])
         },
