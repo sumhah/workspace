@@ -46,13 +46,13 @@ export default {
 
 <style lang="scss" scoped>
     .search-box {
-        position: fixed;
-        left: 80px;
-        bottom: 14px;
+        position: relative;
         width: 400px;
         height: 30px;
+        margin-left: 22px;
 
         .search {
+            box-sizing: border-box;
             width: 100%;
             padding: 0 10px;
             height: 30px;

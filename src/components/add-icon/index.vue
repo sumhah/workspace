@@ -28,9 +28,8 @@ export default {
 
 <style lang="scss" scoped>
     .add {
-        position: fixed;
-        left: 22px;
-        bottom: 12px;
+        position: relative;
+        margin-left: 22px;
         width: 36px;
         height: 36px;
         font-size: 26px;
