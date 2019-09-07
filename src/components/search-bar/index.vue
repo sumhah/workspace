@@ -45,6 +45,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    @import "../../scss/theme";
+
     .search-box {
         position: relative;
         width: 400px;
@@ -71,6 +73,10 @@ export default {
                 font-weight: normal;
                 background-color: #ffffff;
                 box-shadow: 0 2px 4px 3px rgba(255, 255, 255, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+                + .search-icon {
+                    fill: $themeActiveColor;
+                }
             }
         }
 
@@ -80,7 +86,8 @@ export default {
             left: 8px;
             width: 16px;
             height: 16px;
-            fill: #afbdcf;
+            fill: #666;
+            transition: all .3s ease;
         }
     }
 </style>

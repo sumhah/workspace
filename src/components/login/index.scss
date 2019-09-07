@@ -1,0 +1,217 @@
+@import "../../scss/theme.scss";
+@import "../../scss/helper.scss";
+
+.login-wrapper {
+}
+
+.header-btn-login {
+    box-sizing: border-box;
+    display: block;
+    width: 50%;
+    @include mgc;
+    font-size: 14px;
+    height: 46px;
+    line-height: 44px;
+    padding: 0 6px;
+    min-width: 60px;
+    border: 1px solid $themeActiveColor;
+    color: $themeActiveColor;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle;
+    background-color: #222;
+    transition: all .3s ease;
+    
+    &:hover {
+        color: #ffffff;
+        background-color: $themeActiveColor;
+    }
+}
+
+.avatar {
+    z-index: 999999999;
+    position: relative;
+    //display: inline-block;
+    display: none;
+    width: 30px;
+    height: 30px;
+    margin-left: 40px;
+    border-radius: 2px;
+    vertical-align: middle;
+    background-size: 100% 100%;
+    background-position: center center;
+    cursor: pointer;
+    
+    &:hover {
+        .menu {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+    }
+    
+    .menu {
+        position: absolute;
+        left: 50%;
+        @include absolute-level-center;
+        top: 50px;
+        width: 118px;
+        padding: 6px 0;
+        background-color: #ffffff;
+        border-radius: 4px;
+        transform: translateX(-50%) scale(0);
+        transform-origin: 50% 0;
+        opacity: 0;
+        box-shadow: 0 5px 20px rgba(26, 26, 26, .1);
+        transition: transform .2s ease, opacity .3s ease;
+        
+        &:before {
+            @include absolute-level-center;
+            top: -10px;
+            @include triangle(top, 16, #fff);
+            content: '';
+        }
+        
+        &:after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -30px;
+            height: 30px;
+            content: '';
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0 20px;
+            height: 36px;
+            cursor: pointer;
+            color: $commentColor;
+            background-color: #ffffff;
+            text-align: left;
+            transition: background-color .3s ease;
+            
+            &:hover {
+                background-color: rgba(0, 0, 0, .05);
+            }
+        }
+    }
+}
+
+.login-box-wrap {
+    z-index: 99999999;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #000;
+    font-weight: normal;
+    
+    .login-box {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        width: 440px;
+        height: 400px;
+        padding-top: 20px;
+        border-radius: 1px;
+        background-color: rgba(0, 0, 0, .1);
+        box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, .04);
+        user-select: none;
+        color: darken($themeActiveColor, 10);
+        text-align: center;
+        
+        .title {
+            font-size: 48px;
+            margin-bottom: 6px;
+        }
+        
+        .subtitle {
+            width: 80%;
+            font-size: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
+        }
+        
+        .input {
+            width: 340px;
+            height: 40px;
+            font-size: 16px;
+            color: #fff;
+            border-bottom: 1px solid #333;
+            transition: all .3s ease;
+            background-color: transparent;
+            
+            &:focus {
+                border-bottom-color: $themeActiveColor;
+            }
+            
+            &::placeholder {
+                color: #666;
+            }
+        }
+        
+        .username, .password {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .username {
+            position: relative;
+            
+            .btn-get-code {
+                @include absolute-vertical-center;
+                right: 60px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 12px;
+                padding: 0 10px;
+                color: #fff;
+                text-align: center;
+                cursor: pointer;
+                border-radius: 4px;
+                background-color: $themeActiveColor;
+                transition: all .3s ease;
+                
+                &:hover {
+                    background-color: darken($themeActiveColor, 10);
+                }
+            }
+        }
+        
+        .error {
+            position: absolute;
+            top: 8px;
+            right: 50px;
+            color: $errorColor;
+            font-size: 14px;
+            line-height: 32px;
+        }
+        
+        .btn-login {
+            width: 340px;
+            height: 40px;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 2px;
+            background-color: $themeActiveColor;
+            color: #fff;
+            cursor: pointer;
+            transition: all .4s ease;
+            
+            &:hover {
+                background-color: darken($themeActiveColor, 10);
+            }
+            
+            &.on {
+                opacity: .4;
+                cursor: default;
+            }
+        }
+    }
+}

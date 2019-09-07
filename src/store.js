@@ -8,6 +8,9 @@ export default new Vuex.Store({
     state: {
         searchText: '',
         cardList: [],
+
+        profile: null,
+        loginShow: true,
     },
     mutations: {
         searchTextChange(state, val) {
@@ -39,6 +42,12 @@ export default new Vuex.Store({
         },
         clearData(state) {
             state.cardList = [];
+        },
+        loginShow(state, isShow) {
+            state.loginShow = isShow
+        },
+        setProfile(state, profile) {
+            state.profile = profile
         },
     },
 });

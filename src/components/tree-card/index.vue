@@ -4,17 +4,19 @@
         @dblclick.stop="popEdit"
         @click.stop
     >
-        <highlight-code auto class="card-pre">
-            {{ value }}
-        </highlight-code>
-        <textarea
-            v-show="isEdit"
-            ref="editor"
-            v-model="myValue"
-            class="card editor"
-            placeholder="请输入内容"
-            @blur="isEdit = false"
-        ></textarea>
+        <div class="card-box">
+            <highlight-code auto class="card-pre">
+                {{ value }}
+            </highlight-code>
+            <textarea
+                v-show="isEdit"
+                ref="editor"
+                v-model="myValue"
+                class="card editor"
+                placeholder="请输入内容"
+                @blur="isEdit = false"
+            ></textarea>
+        </div>
 <!--        <button class="delete" @click="remove">x</button>-->
     </div>
 </template>

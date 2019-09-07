@@ -5,20 +5,37 @@ import router from './router';
 import store from './store';
 import components from './components';
 import 'element-ui/lib/theme-chalk/index.css';
-import VueHighlightJS from 'vue-highlight.js';
 import 'vue-highlight.js/lib/allLanguages'
-
-/*
-* Import Highlight.js theme
-* Find more: https://highlightjs.org/static/demo/
-*/
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import {get, post, deleteApi, put} from './libs/request'
 import 'highlight.js/styles/monokai-sublime.css';
-// import 'highlight.js/styles/an-old-hope.css';
-// import 'highlight.js/styles/atom-one-dark-reasonable.css';
+import VueCodemirror from 'vue-codemirror';
+
+import 'codemirror/mode/vue/vue.js';
+import 'codemirror/mode/markdown/markdown.js';
+import 'codemirror/mode/javascript/javascript.js';
+
+import './scss/reset.scss';
+import "./scss/transition.scss";
+import "./scss/animate.scss";
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+
+Vue.use(VueCodemirror, /* {
+  options: { theme: 'base16-dark', ... },
+  events: ['scroll', ...]
+} */)
+
+Vue.use(VueAxios, axios);
+
+Vue.prototype.get = get
+Vue.prototype.post = post
+Vue.prototype.deleteApi = deleteApi
+Vue.prototype.put = put
 
 Vue.use(ElementUI);
 Vue.use(components);
-Vue.use(VueHighlightJS);
 Vue.config.productionTip = false;
 
 new Vue({

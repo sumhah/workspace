@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Status from './pages/status';
 import Notepad from './pages/notepad';
 import AST from './pages/ast';
-import Knowledge from './pages/knowledge';
+import Knowledge from './pages/knowledge/knowledge';
 
 Vue.use(Router);
 

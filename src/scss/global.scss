@@ -1,0 +1,194 @@
+@import "../scss/theme.scss";
+@import "../scss/iconfont.scss";
+
+@font-face {
+    font-family: "OpenSans";
+    src: url('https://linbingyuan.oss-cn-beijing.aliyuncs.com/SourceHanSansCN-Light.424662e.otf');
+}
+@font-face {
+    font-family: "sourceHanSansCN";
+    src: url('https://linbingyuan.oss-cn-beijing.aliyuncs.com/SourceHanSansCN-Light.424662e.otf');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.color-tree-root-body {
+    ::-webkit-scrollbar
+    {
+        width: 6px;
+        height: 6px;
+        background-color: $bgColor;
+    }
+    
+    /*定义滚动条轨道 内阴影+圆角*/
+    ::-webkit-scrollbar-track
+    {
+        border-radius: 10px;
+        background-color: $bgColor;
+    }
+    
+    /*定义滑块 内阴影+圆角*/
+    ::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+        background-color: $themeActiveColor;
+    }
+    
+    .app {
+        height: 100%;
+    }
+    
+    .CodeMirror {
+        height: 100% !important;
+        font-size: 12px !important;
+        background-color: $bgColor !important;
+        
+        .CodeMirror-scroll {
+            min-height: 500px !important;
+        }
+        
+        &.cm-s-material {
+            .CodeMirror-gutters {
+                background-color: $bgColor !important;
+            }
+        }
+    }
+    
+    .menu-bar {
+        z-index: 1000;
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        left: 0;
+        width: 100%;
+        height: 46px;
+        bottom: 0;
+        background-color: $bgColor;
+        
+        .left-area, .right-area {
+            display: flex;
+            align-items: center;
+        }
+    }
+    
+    .calc-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        visibility: hidden;
+        height: auto;
+        width: auto;
+        white-space: pre-wrap;
+        font-size: 14px;
+    }
+    
+    .el-popover {
+        background: #222;
+        border-color: transparent;
+    }
+    
+    .el-rate {
+        display: flex;
+        align-items: center;
+    }
+    
+    .el-rate__icon {
+        font-size: 14px;
+    }
+    
+    .el-loading-mask {
+        background-color: #282c33;
+    }
+    
+    .el-loading-spinner {
+        margin-top: -13px;
+        
+        .circular {
+            width: 30px;
+            height: 30px;
+        }
+    }
+    
+    .el-loading-spinner .path {
+        stroke: #b4337d;
+    }
+    
+    .popper-class {
+        background-color: #222;
+        border-color: #222;
+        box-shadow: 0 0 30px 0px rgba(255, 255, 255, 0.2)
+    }
+    
+    .btn-popper-close {
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        right: -30px;
+        font-size: 24px;
+        color: #fff;
+        opacity: .4;
+        transition: opacity .3s ease;
+        
+        &:hover {
+            opacity: 1;
+        }
+    }
+    
+    @each $item in (top, bottom, left, right) {
+        .el-popper[x-placement^=#{$item}] .popper__arrow {
+            border-#{$item}-color: #222;
+            
+            &:after {
+                border-#{$item}-color: #222;
+            }
+        }
+    }
+    
+    .el-message--success {
+        border-color: transparent;
+        background-color: $themeActiveColor;
+        
+        .el-message__content {
+            color: #fff;
+        }
+    }
+    
+    .el-message .el-icon-success {
+        color: #fff;
+    }
+    
+    .el-switch {
+        display: block;
+        margin-bottom: 10px;
+        user-select: none;
+        font-size: 14px;
+        
+        .el-switch__label {
+            color: #666;
+        }
+        
+        * {
+            font-size: 12px;
+        }
+        
+        &.is-checked {
+            .el-switch__label {
+                color: #999;
+            }
+        }
+        
+        &:hover {
+            .el-switch__label {
+                color: #999;
+            }
+        }
+    }
+}

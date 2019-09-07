@@ -1,0 +1,16 @@
+[
+    {
+        "text": "computed: {\n  fullName: {\n    // getter\n    get: function () {\n      return this.firstName + ' ' + this.lastName\n    },\n    // setter\n    set: function (newValue) {\n      var names = newValue.split(' ')\n      this.firstName = names[0]\n      this.lastName = names[names.length - 1]\n    }\n  }\n}",
+        "checkNumber": 0,
+        "createTime": 1564908169153,
+        "modifyTime": 1564908169153,
+        "id": "15649081691535589"
+    },
+    {
+        "text": "a",
+        "checkNumber": 0,
+        "createTime": 1564908172120,
+        "modifyTime": 1564908172120,
+        "id": "15649081721209602"
+    }
+]

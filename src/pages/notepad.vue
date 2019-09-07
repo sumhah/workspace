@@ -4,7 +4,7 @@
             <TransitionGroup
                 v-for="(line,i) in lines"
                 :key="i"
-                name="fade"
+                name="scale-in"
                 tag="div"
                 class="line"
             >

@@ -104,7 +104,7 @@
             </div>
         </div>
         <ul class="todo-list">
-            <transition-group name="fade">
+            <transition-group name="scale-in">
                 <li
                     v-for="(item) in showTodoList"
                     v-show="todoInCurrentPlace(item)"
