@@ -2,11 +2,7 @@
     <div class="menu-bar">
         <div class="left-area">
             <SearchBar />
-            <i
-                class="btn-action btn-delete el-icon-delete"
-                style="font-size: 20px;margin-left: 10px;"
-                @click="remove"
-            ></i>
+            <i class="btn-action btn-delete el-icon-delete" @click="remove"></i>
         </div>
         <div class="right-area">
             <el-button
@@ -23,8 +19,23 @@
 </template>
 
 <script>
+    import { debounce } from '@libs/util.js'
+
     export default {
         name: 'MenuBar',
+
+        props: {
+            currentTree: {
+                required: true,
+                type: Object,
+            },
+
+            treeDataList: {
+                required: true,
+                type: Array,
+                default: null,
+            },
+        },
 
         data(){
             return {
@@ -32,26 +43,23 @@
             }
         },
 
+        watch: {
+            treeDataList: {
+                deep: true,
+                handler() {
+                    this.autoSync();
+                },
+            },
+        },
+
         methods: {
             async remove() {
-                const {tree} = this.$refs;
-                const data = tree.getCurrentNode();
-                const node = tree.getNode(data);
-                if (node.level <= 1) {
-                    return;
-                }
-                const {parent} = node;
-                const children = parent.data.children || parent.data;
-                // if (data.children.length > 0) {
-                //     await this.$confirm('This node has data. Whether to delete this node', 'Prompt', {
-                //         confirmButtonText: 'Confirm',
-                //         cancelButtonText: 'Cancel',
-                //         type: 'warning',
-                //     });
-                // }
-                const index = children.findIndex(d => d.id === data.id);
-                children.splice(index, 1);
+                this.$emit('remove-current-node')
             },
+
+            autoSync: debounce(function () {
+                this.syncToServer();
+            }, 1000),
 
             async syncToServer() {
                 if (this.isInToSync) return;
@@ -69,6 +77,47 @@
     };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    @import "../../../scss/theme.scss";
 
+    .menu-bar {
+        .btn-delete {
+            font-size: 20px;margin-left: 10px;
+        }
+
+        /deep/ .search-box .search {
+            background-color: #333;
+
+            &:focus {
+                color: #fff;
+                font-style: normal;
+                font-weight: normal;
+                background-color: #444;
+                box-shadow: 0 2px 4px 3px rgba(68, 68, 68, 0.16), 0 0 0 1px rgba(68, 68, 68, 0.08);
+            }
+        }
+
+        .setting-btn, .sync-btn {
+            box-sizing: border-box;
+            font-size: 12px;
+            height: 46px;
+            line-height: 44px;
+            padding: 0 12px;
+            margin-left: 10px;
+            min-width: 60px;
+            border: none;
+            border-radius: 0;
+            //border: 1px solid $themeActiveColor;
+            color: $themeActiveColor;
+            cursor: pointer;
+            vertical-align: middle;
+            background-color: $bgColor;
+            transition: all .3s ease;
+
+            &:hover {
+                color: #ffffff;
+                background-color: $themeActiveColor;
+            }
+        }
+    }
 </style>

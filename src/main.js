@@ -15,6 +15,13 @@ import VueCodemirror from 'vue-codemirror';
 import 'codemirror/mode/vue/vue.js';
 import 'codemirror/mode/markdown/markdown.js';
 import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/mode/php/php.js';
+import 'codemirror/mode/go/go.js';
+import 'codemirror/mode/nginx/nginx.js';
+import 'codemirror/mode/python/python.js';
+import 'codemirror/mode/sass/sass.js';
+import 'codemirror/mode/css/css.js';
+import 'codemirror/mode/htmlembedded/htmlembedded.js';
 
 import './scss/reset.scss';
 import "./scss/transition.scss";

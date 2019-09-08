@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import {setToken} from '../../libs/token';
+    import {setToken} from '@libs/token';
     import {mapState} from 'vuex';
 
     export default {

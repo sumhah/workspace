@@ -47,11 +47,11 @@
     
     .CodeMirror {
         height: 100% !important;
-        font-size: 12px !important;
+        //font-size: 12px !important;
         background-color: $bgColor !important;
         
         .CodeMirror-scroll {
-            min-height: 500px !important;
+            //min-height: 500px !important;
         }
         
         &.cm-s-material {

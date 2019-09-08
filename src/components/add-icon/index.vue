@@ -1,10 +1,10 @@
 <template>
     <button
-        class="add"
+        class="btn-add"
         :class="{active: addActive}"
         @click="addCard"
     >
-        <span class="add-icon">+</span>
+        <span class="btn-add-icon">+</span>
     </button>
 </template>
 
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .add {
+    .btn-add {
         position: relative;
         margin-left: 22px;
         width: 36px;

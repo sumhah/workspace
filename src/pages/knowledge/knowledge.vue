@@ -54,42 +54,21 @@
                 </div>
             </span>
             </el-tree>
-            <div class="editor-box">
-                <div v-if="!currentTreeNodeData" class="no-data-tip">
-                    <div>
-                        <p>Select a Node</p>
-                    </div>
-                </div>
-                <codemirror
-                    v-if="currentTreeNodeData"
-                    v-model="currentTreeNodeData.label"
-                    ref="codemirror"
-                    :options="codemirrorOption"
-                ></codemirror>
-            </div>
+            <EditorBox :tree-node-data="currentTreeNodeData" />
         </div>
-
-
+        <MenuBar :current-tree="currentTree" :tree-data-list="treeDataList" @remove-current-node="removeCurrentNode" />
     </div>
 </template>
 
 <script>
     import {mapState} from 'vuex';
     import uuid from 'uuid/v1';
-    import {debounce} from '../../libs/util';
-    import treeData from '../../mock/1.json';
-
-    const requireComponent = require.context(
-        './components',
-        true,
-        /[\w-]+\.vue$/
-    );
-
-    console.log(requireComponent);
+    import {getLocalComponents} from '../../libs/util';
 
     export default {
+        components: { ...getLocalComponents(require.context('./components', true, /[\w-]+\.vue$/)) },
+
         data() {
-            // userData.config = initConfig;
             const initConfig = {
                 isShowRate: false,
                 isDrag: true,
@@ -118,26 +97,8 @@
                     },
                 },
                 isInSync: false,
-                lastSyncTime: Date.now(),
-
-                currentTreeNodeData: null,
-
-                codemirrorOption: {
-                    tabSize: 4,
-                    styleActiveLine: true,
-                    lineNumbers: true,
-                    line: true,
-                    foldGutter: true,
-                    styleSelectedText: true,
-                    mode: 'markdown',
-                    // keyMap: "sublime",
-                    matchBrackets: true,
-                    showCursorWhenSelecting: true,
-                    theme: 'material',
-                    extraKeys: {'Ctrl': 'autocomplete'},
-                    hintOptions: {
-                        completeSingle: false,
-                    },
+                currentTreeNodeData: {
+                    label: '',
                 },
             };
         },
@@ -158,12 +119,6 @@
                 },
             },
 
-            config: {
-                deep: true,
-                handler(val) {
-                },
-            },
-
             async profile(val) {
                 localStorage.setItem('profile', JSON.stringify(val));
                 if (val) {
@@ -175,18 +130,6 @@
             async currentTree() {
                 await this.$nextTick();
                 this.$refs.tree.filter({searchText: this.searchText});
-            },
-
-            treeDataList: {
-                deep: true,
-                handler() {
-                    this.autoSync();
-                },
-            },
-
-            ['currentTreeNodeData'](val) {
-                // if (!this.currentTreeNodeData) return;
-                // this.currentTreeNodeData.label = val;
             },
         },
 
@@ -239,11 +182,29 @@
                 this.currentTree = item;
             },
 
+            async removeCurrentNode() {
+                const {tree} = this.$refs;
+                const data = tree.getCurrentNode();
+                const node = tree.getNode(data);
+                if (node.level <= 1) {
+                    return;
+                }
+                const {parent} = node;
+                const children = parent.data.children || parent.data;
+                // if (data.children.length > 0) {
+                //     await this.$confirm('This node has data. Whether to delete this node', 'Prompt', {
+                //         confirmButtonText: 'Confirm',
+                //         cancelButtonText: 'Cancel',
+                //         type: 'warning',
+                //     });
+                // }
+                const index = children.findIndex(d => d.id === data.id);
+                children.splice(index, 1);
+                this.handleCurrentTreeChange({ label: '' });
+            },
+
             async handleCurrentTreeChange(data, node) {
-                console.log('handleCurrentTreeChange');
                 this.currentTreeNodeData = data;
-                await this.$nextTick();
-                this.$refs.codemirror.cminstance.focus();
             },
 
             handleCollapse(data, node) {
@@ -307,10 +268,6 @@
                 localStorage.setItem('knowledge_data', JSON.stringify(this.treeDataList));
                 this.$message.success('Saved locally');
             },
-
-            autoSync: debounce(function () {
-                this.syncToServer();
-            }, 1000),
 
             dataOrParentIncludesString({label}, {parent, level}, text) {
                 if (label && label.includes(text)) return true;

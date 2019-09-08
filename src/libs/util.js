@@ -1,3 +1,5 @@
+var path = require('path');
+
 export function rand(n, m) {
     return n + Math.floor(Math.random() * (m - n));
 }
@@ -49,4 +51,12 @@ export function debounce(fn, wait) {
         clearTimeout(timer)
         timer = setTimeout(fn.bind(this), wait)
     }
+}
+
+export function getLocalComponents(requireComponent) {
+    return requireComponent.keys().reduce((obj, fileName) => {
+        const componentConfig = requireComponent(fileName).default;
+        obj[componentConfig.name] = componentConfig;
+        return obj;
+    }, {});
 }
