@@ -21,7 +21,7 @@
     "echarts": "^4.2.1",
     "element-ui": "^2.11.1",
     "esprima": "^4.0.1",
-    "highlight.js": "^9.15.9",
+    "highlight.js": "^10.4.1",
     "md5": "^2.2.1",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
